@@ -1,17 +1,15 @@
 package application;
 
-import tabuleiro.Tabuleiro;
+import chess.ChessMatch;
 
 public class Program {
 
 	public static void main(String[] args) {
 		
-
-		Tabuleiro tabuleiro = new Tabuleiro(8, 8);
-		
+		ChessMatch chessMatch = new ChessMatch();
+		UI.printTabuleiro(chessMatch.getPieces());
 				
-		
-		
+				
 	}
 
 }
