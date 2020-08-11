@@ -2,7 +2,6 @@ package chess;
 
 import chess.pieces.Rei;
 import chess.pieces.Torre;
-import tabuleiro.Position;
 import tabuleiro.Tabuleiro;
 
 public class ChessMatch {
@@ -25,10 +24,14 @@ public class ChessMatch {
 			return mat;
 	}
 	
+	private void placeNewPiece(char column, int row, ChessPiece piece) {
+		tabuleiro.placePiece(piece, new ChessPosition(column, row).toPosition());
+	}
+	
 	private void initialSetup() {
-		tabuleiro.placePiece(new Torre(tabuleiro, Color.WHITE), new Position(2, 1));
-		tabuleiro.placePiece(new Rei(tabuleiro, Color.BLACK), new Position(0, 4));
-		tabuleiro.placePiece(new Rei(tabuleiro, Color.WHITE), new Position(7, 4));
+		placeNewPiece('b', 6, new Torre(tabuleiro, Color.WHITE));
+		placeNewPiece('e', 8, new Rei(tabuleiro, Color.BLACK));
+		placeNewPiece('e', 1, new Rei(tabuleiro, Color.WHITE));
 	}
 		
 }
