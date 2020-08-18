@@ -2,6 +2,8 @@ package chess;
 
 import chess.pieces.Rei;
 import chess.pieces.Torre;
+import tabuleiro.Piece;
+import tabuleiro.Position;
 import tabuleiro.Tabuleiro;
 
 public class ChessMatch {
@@ -23,6 +25,28 @@ public class ChessMatch {
 			}
 			return mat;
 	}
+	
+	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+		Position source = sourcePosition.toPosition();
+		Position target = targetPosition.toPosition();
+		validateSourcePosition(source);
+		Piece capturedPiece = makeMove(source, target);
+		return (ChessPiece)capturedPiece;
+	}
+	
+	private Piece makeMove(Position source, Position target) {
+		Piece p = tabuleiro.removePiece(source);
+		Piece capturedPiece = tabuleiro.removePiece(target);
+		tabuleiro.placePiece(p, target);
+		return capturedPiece;
+	}
+		
+	private void validateSourcePosition(Position position) {
+		if (!tabuleiro.thereIsAPiece(position)) {
+			throw new ChessException("Não existe peça na posição de origem");
+		}
+	}
+	
 	
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
 		tabuleiro.placePiece(piece, new ChessPosition(column, row).toPosition());
